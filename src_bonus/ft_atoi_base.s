@@ -27,13 +27,38 @@ ft_char_to_int:
 	mov rax, rdi
 	ret
 
-ft_atoi_base:			; rdi - s, rsi - s_base
-	xor r11, r11		; r11 - sign
-	mov r10, rdi		; r10 - s
+ft_isspace:
+	or rax, 0x01
+	cmp rdi, 0x09		; '\t'
+	jl .ret_no
+	cmp rdi, 0x0E		; '\r' + 1
+	jl .ret_yes
+	cmp rdi, 0x20		; ' '
+	je .ret_yes
+.ret_no:
 	xor rax, rax
+.ret_yes:
+	ret
+
+ft_atoi_base:			; rdi - s, rsi - s_base
+	mov r10, rdi		; r10 - s
+.skip_space:
+	xor rdi, rdi
+	mov dil, byte[r10]
+	push rsi
+	push r10
+	call ft_isspace
+	pop r10
+	pop rsi
+	test rax, rax
+	jz .end_skip_space 
+	inc r10
+	jmp .skip_space
+.end_skip_space:
+	xor r11, r11		; r11 - sign
 	xor rdx, rdx		; rdx - result
 	mov al, byte[r10]
-	cmp al, 0x2D
+	cmp al, 0x2D		; '-'
 	jne .get_digit
 	inc r11
 	inc r10
