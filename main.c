@@ -6,7 +6,7 @@
 /*   By: matrus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/04 12:05:42 by matrus            #+#    #+#             */
-/*   Updated: 2020/08/04 20:48:59 by matrus           ###   ########.fr       */
+/*   Updated: 2020/08/05 13:54:42 by matrus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,13 +126,55 @@ void	ft_strdup_test()
 	free(s);
 }
 
+void	ft_atoi_base_test()
+{
+//	char i = 33;
+//
+//	while (i < 127)
+//	{
+//		printf("char to int %c: %i\n", i, ft_atoi_base(&i, 16));
+//		i++;
+//	}
+	printf("str: %10s, base: %2i, int: %i\n", "4", 10,  ft_atoi_base("4", 10));
+	printf("str: %10s, base: %2i, int: %i\n", "-4", 10,  ft_atoi_base("-4", 10));
+	printf("str: %10s, base: %2i, int: %i\n", "0", 10,  ft_atoi_base("0", 10));
+	printf("str: %10s, base: %2i, int: %i\n", "8oo", 10,  ft_atoi_base("8oo", 10));
+	printf("str: %10s, base: %2i, int: %i\n", "-73two", 10,  ft_atoi_base("-73two", 10));
+	printf("str: %10s, base: %2i, int: %i\n", "-333-", 10,  ft_atoi_base("-333-", 10));
+	printf("str: %10s, base: %2i, int: %i\n", "--8", 10,  ft_atoi_base("--8", 10));
+	printf("str: %10s, base: %2i, int: %i\n", "ff", 16,  ft_atoi_base("ff", 16));
+	printf("str: %10s, base: %2i, int: %i\n", "1f", 16,  ft_atoi_base("1f", 16));
+	printf("str: %10s, base: %2i, int: %i\n", "-f", 16,  ft_atoi_base("-f", 16));
+	printf("str: %10s, base: %2i, int: %i\n", "-00ff", 16,  ft_atoi_base("-00ff", 16));
+	printf("str: %10s, base: %2i, int: %i\n", "fedcba9", 16,  ft_atoi_base("fedcba9", 16));
+	printf("str: %10s, base: %2i, int: %i\n", "-fedcba9", 16,  ft_atoi_base("-fedcba9", 16));
+	printf("str: %10s, base: %2i, int: %i\n", "1010", 2,  ft_atoi_base("1010", 2));
+	printf("str: %10s, base: %2i, int: %i\n", "11111110", 2,  ft_atoi_base("11111110", 2));
+	printf("str: %10s, base: %2i, int: %i\n", "-1", 2,  ft_atoi_base("-1", 2));
+	printf("str: %10s, base: %2i, int: %i\n", "-11112110", 2,  ft_atoi_base("-11112110", 2));
+	printf("str: %10s, base: %2i, int: %i\n", "111", 2,  ft_atoi_base("111", 2));
+	printf("str: %10s, base: %2i, int: %i\n", "0", 2,  ft_atoi_base("0", 2));
+	printf("str: %10s, base: %2i, int: %i\n", "7fffffff", 16,  ft_atoi_base("7fffffff", 16));
+	printf("str: %10s, base: %2i, int: %i\n", "7FFFffff", 16,  ft_atoi_base("7FFFffff", 16));
+	printf("str: %10s, base: %2i, int: %i\n", "7ffffffF", 16,  ft_atoi_base("7ffffffF", 16));
+	printf("str: %10s, base: %2i, int: %i\n", "7fffFFFf", 16,  ft_atoi_base("7fffFFFf", 16));
+	printf("str: %10s, base: %2i, int: %i\n", "4A5561", 12,  ft_atoi_base("4A5561", 12));
+	printf("str: %10s, base: %2i, int: %i\n", "3030", 6,  ft_atoi_base("3030", 6));
+	printf("str: %10s, base: %2i, int: %i\n", "15B9D2A", 15,  ft_atoi_base("15B9D2A", 15));
+	printf("str: %10s, base: %2i, int: %i\n", "-15B9D2A", 15,  ft_atoi_base("-15B9D2A", 15));
+	printf("str: %10s, base: %2i, int: %i\n", "-000000000000000000001", 2,  ft_atoi_base("-000000000000000000001", 2));
+	printf("str: %10s, base: %2i, int: %i\n", "-0000000000000000000a1", 2,  ft_atoi_base("-0000000000000000000a1", 2));
+	printf("str: %10s, base: %2i, int: %i\n", "000000000000000010001", 2,  ft_atoi_base("000000000000000010001", 2));
+}
+
 int main(void)
 {
-	ft_strlen_test();
-	ft_strcmp_test();
-	ft_strcpy_test();
-	ft_write_test();
-	ft_read_test();
-	ft_strdup_test();
+	ft_atoi_base_test();
+//	ft_strlen_test();
+//	ft_strcmp_test();
+//	ft_strcpy_test();
+//	ft_write_test();
+//	ft_read_test();
+//	ft_strdup_test();
 	return (0);
 }

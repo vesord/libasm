@@ -11,10 +11,16 @@
 #* ************************************************************************** *#
 
 NAME = libasm.a
+
 SRC_DIR = src
 SRC = $(wildcard $(SRC_DIR)/*.s)
 OBJ_DIR = obj
 OBJ = $(SRC:$(SRC_DIR)/%.s=$(OBJ_DIR)/%.o)
+
+SRC_B_DIR = src_bonus
+SRC_B = $(wildcard $(SRC_B_DIR)/*.s)
+OBJ_DIR = obj
+OBJ_B = $(SRC_B:$(SRC_B_DIR)/%.s=$(OBJ_DIR)/%.o)
 
 .PHONY: all
 all: $(OBJ_DIR) $(NAME)
@@ -23,6 +29,13 @@ $(NAME): $(OBJ)
 	ar -rc $(NAME) $^ 
 
 $(OBJ): $(OBJ_DIR)/%.o: $(SRC_DIR)/%.s
+	nasm -felf64 $< -o $@
+
+.PHONY: bonus
+bonus: $(OBJ_DIR) $(OBJ_B) $(NAME)
+	ar -r $(NAME) $(OBJ_B) 
+
+$(OBJ_B): $(OBJ_DIR)/%.o: $(SRC_B_DIR)/%.s
 	nasm -felf64 $< -o $@
 
 $(OBJ_DIR):
