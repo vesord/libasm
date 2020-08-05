@@ -6,7 +6,7 @@
 /*   By: matrus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/04 12:05:42 by matrus            #+#    #+#             */
-/*   Updated: 2020/08/05 15:08:15 by matrus           ###   ########.fr       */
+/*   Updated: 2020/08/05 16:48:05 by matrus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,13 +128,6 @@ void	ft_strdup_test()
 
 void	ft_atoi_base_test()
 {
-//	char i = 33;
-//
-//	while (i < 127)
-//	{
-//		printf("char to int %c: %i\n", i, ft_atoi_base(&i, 16));
-//		i++;
-//	}
 	printf("str: %16s, base: %2i, int: %i\n", "", 10,  ft_atoi_base("", 10));
 	printf("str: %16s, base: %2i, int: %i\n", "4", 10,  ft_atoi_base("4", 10));
 	printf("str: %16s, base: %2i, int: %i\n", "-4", 10,  ft_atoi_base("-4", 10));
@@ -172,9 +165,74 @@ void	ft_atoi_base_test()
 	printf("str: %16s, base: %2i, int: %i\n", "0000000010001", 2,  ft_atoi_base("0000000010001", 2));
 }
 
+void	ft_create_elem_test()
+{
+	t_list *elem;
+	int i = 100500;
+
+	elem = NULL;
+	elem = ft_create_elem(&i);
+	printf("elem data: %i\n", *((int*)(elem->data)));
+	free(elem);
+
+	elem = NULL;
+	const char c[20] = "Hello, world!\0";
+	elem = ft_create_elem((void*)c);
+	printf("elem data: %s\n", ((char*)(elem->data)));
+	free(elem);
+}
+
+void	ft_list_push_front_test()
+{
+	t_list *list;
+	const char c1[20] = "Hello, world1!\0";
+	const char c2[20] = "Hello, world2!\0";
+	const char c3[20] = "Hello, world3!\0";
+
+	list = NULL;
+	ft_list_push_front(&list, (void*)c3);
+	ft_list_push_front(&list, (void*)c2);
+	ft_list_push_front(&list, (void*)c1);
+	printf("1 elem: %s\n", ((char*)(list->data)));
+	printf("2 elem: %s\n", ((char*)(list->next->data)));
+	printf("3 elem: %s\n", ((char*)(list->next->next->data)));
+	free(list->next->next);
+	free(list->next);
+	free(list);
+}
+
+void	ft_list_size_test()
+{
+	t_list *list;
+	const char c1[20] = "Hello, world1!\0";
+	const char c2[20] = "Hello, world2!\0";
+	const char c3[20] = "Hello, world3!\0";
+
+	list = NULL;
+	printf("size: %i\n", ft_list_size(list));
+	ft_list_push_front(&list, (void*)c3);
+	printf("size: %i\n", ft_list_size(list));
+	ft_list_push_front(&list, (void*)c2);
+	printf("size: %i\n", ft_list_size(list));
+	ft_list_push_front(&list, (void*)c1);
+	printf("size: %i\n", ft_list_size(list));
+	free(list->next->next);
+	list->next->next = NULL;
+	printf("size: %i\n", ft_list_size(list));
+	free(list->next);
+	list->next = NULL;
+	printf("size: %i\n", ft_list_size(list));
+	free(list);
+	list = NULL;
+	printf("size: %i\n", ft_list_size(list));
+}
+
 int main(void)
 {
-	ft_atoi_base_test();
+	ft_list_size_test();
+//	ft_list_push_front_test();
+//	ft_create_elem_test();
+//	ft_atoi_base_test();
 //	ft_strlen_test();
 //	ft_strcmp_test();
 //	ft_strcpy_test();
