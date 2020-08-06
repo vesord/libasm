@@ -1,18 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libasm.h                                           :+:      :+:    :+:   */
+/*   libasm_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: matrus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/04 12:04:32 by matrus            #+#    #+#             */
-/*   Updated: 2020/08/06 22:51:27 by matrus           ###   ########.fr       */
+/*   Created: 2020/08/06 22:33:34 by matrus            #+#    #+#             */
+/*   Updated: 2020/08/06 22:34:58 by matrus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#ifndef LIBASM_H
-# define LIBASM_H
+#ifndef LIBASM_BONUS_H
+# define LIBASM_BONUS_H
 
 # include <errno.h>
 # include <stdio.h>
@@ -22,13 +21,17 @@
 # include <string.h>
 # include <fcntl.h>
 
-size_t	ft_strlen(char *str);
-char	*ft_strcpy(char *dst, char *src);
-int		ft_strcmp(char *s1, char *s2);
-ssize_t	ft_write(int fd, const void *buf, size_t count);
-ssize_t	ft_read(int fd, const void *buf, size_t count);
-char	*ft_strdup(char *s);
+typedef struct	s_list
+{
+	void			*data;
+	struct s_list	*next;
+}				t_list;
 
-
+int		ft_atoi_base(char *str, int str_base);
+t_list	*ft_create_elem(void *data);
+void	ft_list_push_front(t_list **begin_list, void *data);
+int		ft_list_size(t_list *begin_list);
+void	ft_list_sort(t_list **begin_list, int (*cmp)(void*, void*));
+void	ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(void *, void*));
 
 #endif

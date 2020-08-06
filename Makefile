@@ -22,6 +22,10 @@ SRC_B = $(wildcard $(SRC_B_DIR)/*.s)
 OBJ_DIR = obj
 OBJ_B = $(SRC_B:$(SRC_B_DIR)/%.s=$(OBJ_DIR)/%.o)
 
+CC = clang
+FLAGS = -Wall -Wextra -Werror
+NASM_COMPILE = nasm -felf64
+
 .PHONY: all
 all: $(OBJ_DIR) $(NAME)
 
@@ -29,21 +33,26 @@ $(NAME): $(OBJ)
 	ar -rc $(NAME) $^ 
 
 $(OBJ): $(OBJ_DIR)/%.o: $(SRC_DIR)/%.s
-	nasm -felf64 $< -o $@
+	$(NASM_COMPILE) $< -o $@
 
 .PHONY: bonus
 bonus: $(OBJ_DIR) $(OBJ_B) $(NAME)
 	ar -r $(NAME) $(OBJ_B) 
 
 $(OBJ_B): $(OBJ_DIR)/%.o: $(SRC_B_DIR)/%.s
-	nasm -felf64 $< -o $@
+	$(NASM_COMPILE) $< -o $@
 
 $(OBJ_DIR):
 	mkdir $@
 
 .PHONY: test
-test:
-	clang -I. main.c -L. -lasm -o $@
+test: all
+	$(CC) $(FLAGS) -I. main.c -L. -lasm -o $@
+	./$@
+
+.PHONY: test_bonus
+test_bonus: bonus
+	$(CC) $(FLAGS) -I. main_bonus.c -L. -lasm -o $@
 	./$@
 
 .PHONY: clean
@@ -54,7 +63,7 @@ clean:
 .PHONY: fclean
 fclean: clean
 	rm -rf $(NAME)
-	rm -rf test
+	rm -rf test*
 
 .PHONY: re
 re: fclean all

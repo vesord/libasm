@@ -1,34 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libasm.h                                           :+:      :+:    :+:   */
+/*   libasm_tests.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: matrus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/04 12:04:32 by matrus            #+#    #+#             */
+/*   Created: 2020/08/06 22:48:30 by matrus            #+#    #+#             */
 /*   Updated: 2020/08/06 22:51:27 by matrus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef LIBASM_TESTS_H
+# define LIBASM_TESTS_H
 
-#ifndef LIBASM_H
-# define LIBASM_H
+void	ft_strlen_test();
+void	ft_strcmp_test();
+void	ft_strcpy_test();
+void	ft_write_test();
+void	ft_read_test();
+void	ft_strdup_test();
 
-# include <errno.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <errno.h>
-# include <unistd.h>
-# include <string.h>
-# include <fcntl.h>
-
-size_t	ft_strlen(char *str);
-char	*ft_strcpy(char *dst, char *src);
-int		ft_strcmp(char *s1, char *s2);
-ssize_t	ft_write(int fd, const void *buf, size_t count);
-ssize_t	ft_read(int fd, const void *buf, size_t count);
-char	*ft_strdup(char *s);
-
-
+void	ft_list_remove_if_test();
+void	ft_list_sort_test();
+void	ft_list_size_test();
+void	ft_list_push_front_test();
+void	ft_create_elem_test();
+void	ft_atoi_base_test();
 
 #endif
