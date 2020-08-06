@@ -1,7 +1,6 @@
 section .text
 	global ft_list_push_front
 	extern ft_create_elem
-	extern malloc
 
 ft_list_push_front:	; rdi - **begin_list, rsi - *data
 	push rdi

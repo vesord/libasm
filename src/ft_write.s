@@ -1,7 +1,6 @@
-extern __errno_location
-global ft_write
-
 section .text
+	extern __errno_location
+	global ft_write
 
 ft_write:		; rdi - fd, rsi - &buff, rdx - count
 	xor rax, rax
