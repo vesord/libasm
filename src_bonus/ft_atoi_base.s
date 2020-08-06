@@ -1,7 +1,7 @@
 section .text
 	global ft_atoi_base ; ft_atoi_base(char *s, int s_base);
 
-ft_char_to_int:
+ft_char_to_int:			; rdi - char
 	cmp rdi, 0x30		; '0'
 	jl .wrong_ret
 	cmp rdi, 0x3A		; '9' + 1
@@ -59,8 +59,13 @@ ft_atoi_base:			; rdi - s, rsi - s_base
 	xor rdx, rdx		; rdx - result
 	mov al, byte[r10]
 	cmp al, 0x2D		; '-'
-	jne .get_digit
+	jne .try_plus
 	inc r11
+	inc r10
+	jmp .get_digit
+.try_plus:
+	cmp al, 0x2B		; '+'
+	jne .get_digit
 	inc r10
 .get_digit:
 	xor rdi, rdi

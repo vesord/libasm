@@ -6,7 +6,7 @@
 /*   By: matrus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/04 12:05:42 by matrus            #+#    #+#             */
-/*   Updated: 2020/08/05 16:48:05 by matrus           ###   ########.fr       */
+/*   Updated: 2020/08/06 17:58:12 by matrus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,15 +131,22 @@ void	ft_atoi_base_test()
 	printf("str: %16s, base: %2i, int: %i\n", "", 10,  ft_atoi_base("", 10));
 	printf("str: %16s, base: %2i, int: %i\n", "4", 10,  ft_atoi_base("4", 10));
 	printf("str: %16s, base: %2i, int: %i\n", "-4", 10,  ft_atoi_base("-4", 10));
+	printf("str: %16s, base: %2i, int: %i\n", "+4", 10,  ft_atoi_base("+4", 10));
 	printf("str: %16s, base: %2i, int: %i\n", "0", 10,  ft_atoi_base("0", 10));
 	printf("str: %16s, base: %2i, int: %i\n", "8oo", 10,  ft_atoi_base("8oo", 10));
 	printf("str: %16s, base: %2i, int: %i\n", "-73two", 10,  ft_atoi_base("-73two", 10));
 	printf("str: %16s, base: %2i, int: %i\n", "-333-", 10,  ft_atoi_base("-333-", 10));
+	printf("str: %16s, base: %2i, int: %i\n", "+333-", 10,  ft_atoi_base("+333-", 10));
 	printf("str: %16s, base: %2i, int: %i\n", "--8", 10,  ft_atoi_base("--8", 10));
+	printf("str: %16s, base: %2i, int: %i\n", "++8", 10,  ft_atoi_base("++8", 10));
+	printf("str: %16s, base: %2i, int: %i\n", "-2147483648", 10,  ft_atoi_base("-2147483648", 10));
+	printf("str: %16s, base: %2i, int: %i\n", "2147483647", 10,  ft_atoi_base("2147483647", 10));
 	printf("str: %16s, base: %2i, int: %i\n", "ff", 16,  ft_atoi_base("ff", 16));
 	printf("str: %16s, base: %2i, int: %i\n", "1f", 16,  ft_atoi_base("1f", 16));
 	printf("str: %16s, base: %2i, int: %i\n", "-f", 16,  ft_atoi_base("-f", 16));
 	printf("str: %16s, base: %2i, int: %i\n", "-00ff", 16,  ft_atoi_base("-00ff", 16));
+	printf("str: %16s, base: %2i, int: %i\n", "+00ff", 16,  ft_atoi_base("+00ff", 16));
+	printf("str: %16s, base: %2i, int: %i\n", "  +00ff", 16,  ft_atoi_base("  +00ff", 16));
 	printf("str: %16s, base: %2i, int: %i\n", "fedcba9", 16,  ft_atoi_base("fedcba9", 16));
 	printf("str: %16s, base: %2i, int: %i\n", "-fedcba9", 16,  ft_atoi_base("-fedcba9", 16));
 	printf("str: %16s, base: %2i, int: %i\n", "1010", 2,  ft_atoi_base("1010", 2));
@@ -152,6 +159,7 @@ void	ft_atoi_base_test()
 	printf("str: %16s, base: %2i, int: %i\n", "7FFFffff", 16,  ft_atoi_base("7FFFffff", 16));
 	printf("str: %16s, base: %2i, int: %i\n", "7ffffffF", 16,  ft_atoi_base("7ffffffF", 16));
 	printf("str: %16s, base: %2i, int: %i\n", "7fffFFFf", 16,  ft_atoi_base("7fffFFFf", 16));
+	printf("str: %16s, base: %2i, int: %i\n", "80000000", 16,  ft_atoi_base("80000000", 16));
 	printf("str: %16s, base: %2i, int: %i\n", "4A5561", 12,  ft_atoi_base("4A5561", 12));
 	printf("str: %16s, base: %2i, int: %i\n", "3030", 6,  ft_atoi_base("3030", 6));
 	printf("str: %16s, base: %2i, int: %i\n", "15B9D2A", 15,  ft_atoi_base("15B9D2A", 15));
@@ -163,6 +171,11 @@ void	ft_atoi_base_test()
 	printf("str: %16s, base: %2i, int: %i\n", "-0000000000001", 2,  ft_atoi_base("-0000000000001", 2));
 	printf("str: %16s, base: %2i, int: %i\n", "-00000000000a1", 2,  ft_atoi_base("-00000000000a1", 2));
 	printf("str: %16s, base: %2i, int: %i\n", "0000000010001", 2,  ft_atoi_base("0000000010001", 2));
+
+	printf("\nEXTRA\n");
+	printf("str: %16s, base: %2i, int: %i\n", "ffffffff", 16,  ft_atoi_base("ffffffff", 16));
+	printf("str: %16s, base: %2i, int: %i\n", "2147483648", 10,  ft_atoi_base("2147483648", 10));
+
 }
 
 void	ft_create_elem_test()
@@ -227,9 +240,51 @@ void	ft_list_size_test()
 	printf("size: %i\n", ft_list_size(list));
 }
 
+int		my_cmp(void *data1, void *data2)
+{
+	return (*((int*)(data1)) - *((int*)(data2)));
+}
+
+void	print_list_int(t_list *list)
+{
+	while (list)
+	{
+		printf("%i\n", *((int*)(list->data)));
+		list = list->next;
+	}
+}
+
+void	ft_list_sort_test()
+{
+	int i1 = 1;
+	int i2 = 2;
+	int i3 = 3;
+	int i4 = 4;
+	int i5 = 5;
+	t_list *list;
+
+	list = NULL;
+	ft_list_push_front(&list, &i1);
+	ft_list_push_front(&list, &i2);
+	ft_list_push_front(&list, &i3);
+	ft_list_push_front(&list, &i4);
+	ft_list_push_front(&list, &i5);
+	printf("Before sort:\n");
+	print_list_int(list);
+	ft_list_sort(&list, my_cmp);
+	printf("\nAfter sort:\n");
+	print_list_int(list);
+	free(list->next->next->next->next);
+	free(list->next->next->next);
+	free(list->next->next);
+	free(list->next);
+	free(list);
+}
+
 int main(void)
 {
-	ft_list_size_test();
+	ft_list_sort_test();
+//	ft_list_size_test();
 //	ft_list_push_front_test();
 //	ft_create_elem_test();
 //	ft_atoi_base_test();

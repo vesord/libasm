@@ -6,7 +6,7 @@
 /*   By: matrus <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/04 12:04:32 by matrus            #+#    #+#             */
-/*   Updated: 2020/08/05 16:36:02 by matrus           ###   ########.fr       */
+/*   Updated: 2020/08/06 09:51:49 by matrus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ typedef struct	s_list
 	t_list	*ft_create_elem(void *data);
 	void	ft_list_push_front(t_list **begin_list, void *data);
 	int		ft_list_size(t_list *begin_list);
+	void	ft_list_sort(t_list **begin_list, int (*cmp)(void*, void*));
 
 #endif
